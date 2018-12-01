@@ -1,0 +1,17 @@
+spring:
+  profiles: Standalone
+  application:
+    name: eureka-server-standalone
+server:
+  port: 8761
+eureka:
+  # 每个EurekaServer 都包含一个EurekaClient，用于请求其他节同步
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    # 单机版不注册到Eureka
+    register-with-eureka: false
+    fetch-registry: false
+  instance:
+    # 指定实例名称，默认：${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
